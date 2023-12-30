@@ -10,7 +10,8 @@ const App = () => {
 
   const handleClick = () => {
     const newCounter = {
-      count: counter.count+1,
+      ...counter,
+      count: counter.count + 1,
     };
     updateCounter(newCounter);
   };
@@ -18,7 +19,9 @@ const App = () => {
   return (
     <>
       {counter.count}
-      <Button color="primary" onButtonClick={handleClick}>Click Me</Button>
+      <Button color="primary" onButtonClick={handleClick}>
+        Click Me
+      </Button>
     </>
   );
 };
