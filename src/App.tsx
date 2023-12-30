@@ -1,9 +1,9 @@
-import Button from "./components/Button";
+import Like from "./components/Like";
 
 const App = () => {
   return (
     <>
-      <Button color="primary">Click Me</Button>
+      <Like onButtonClick={() => {console.log("clicked")}}/>
     </>
   );
 };
