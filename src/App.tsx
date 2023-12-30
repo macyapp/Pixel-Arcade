@@ -9,11 +9,7 @@ const App = () => {
   });
 
   const handleClick = () => {
-    const newCounter = {
-      ...counter,
-      count: counter.count + 1,
-    };
-    updateCounter(newCounter);
+    updateCounter({...counter, count: counter.count+1});
   };
 
   return (
