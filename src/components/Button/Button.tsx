@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import styles from "./Button.module.css";
-import { useState } from "react";
 
 interface ButtonProps {
   children: ReactNode;
