@@ -1,4 +1,4 @@
-import ListGroup from "./components/ListGroup";
+import ListGroup from "./components/ListGroup/ListGroup";
 
 function App() {
   const cities = [
