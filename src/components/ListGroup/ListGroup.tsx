@@ -7,9 +7,14 @@ const List = styled.ul`
   padding: 0;
 `;
 
-const ListItem = styled.li`
+const ListItem = styled.li<ListItemProps>`
   padding: 5px 0;
+  background: ${(props) => (props.active ? "blue" : "none")};
 `;
+
+interface ListItemProps {
+  active: boolean;
+}
 
 interface ListProps {
   items: string[];
@@ -27,6 +32,7 @@ const ListGroup = ({ items, heading, onSelectedItem }: ListProps) => {
         {/* <ul className={[styles["listGroup"], styles["container"]].join(" ")}> */}
         {items.map((item, index) => (
           <ListItem
+            active={index === selectedIndex}
             key={item}
             onClick={() => {
               setSelectedIndex(index);
