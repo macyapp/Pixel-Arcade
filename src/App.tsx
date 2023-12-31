@@ -17,12 +17,20 @@ const App = () => {
   const firstRenderRef = useRef(true);
 
   const handleClick = () => {
-    setCart({
-      ...cart,
-      items: cart.items.map((item) =>
-        item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
-      ),
-    });
+    // setCart({
+    //   ...cart,
+    //   items: cart.items.map((item) =>
+    //     item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
+    //   ),
+    // });
+    setCart(
+      produce(cart, (draftCart) => {
+        const itemIndex = draftCart.items.findIndex((item) => item.id === 1);
+        if (itemIndex !== -1) {
+          draftCart.items[itemIndex].quantity += 1;
+        }
+      })
+    );
   };
 
   useEffect(() => {
