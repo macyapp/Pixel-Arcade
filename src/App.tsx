@@ -16,7 +16,12 @@ const App = () => {
   const isInitialRender = useRef(true);
 
   const handleClick = () => {
-    setGame({ ...game, player: { ...game.player, firstName: "Sid" } });
+    // setGame({ ...game, player: { ...game.player, firstName: "Sid" } });
+    setGame(
+      produce((draft) => {
+        draft.player.firstName = "Sid";
+      })
+    );
   };
 
   // Use useEffect to log changes to the bugs array
@@ -24,8 +29,7 @@ const App = () => {
     if (isInitialRender.current) {
       // If it's the first render, update the ref and don't log
       isInitialRender.current = false;
-    }
-    else {
+    } else {
       // Not the initial render, so log the updated bugs
       console.log(game);
     }
