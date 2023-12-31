@@ -14,11 +14,13 @@ const App = () => {
   const firstRenderRef = useRef(true);
 
   const handleClick = () => {
-    setPizza({...pizza, toppings: [...pizza.toppings, "Cheese"]});
-    // setPizza(produce((draft) => {
-    //   draft.toppings.push("Cheese");
-    // }))
-  }
+    // setPizza({...pizza, toppings: [...pizza.toppings, "Cheese"]});
+    setPizza(
+      produce((draft) => {
+        draft.toppings.push("Cheese");
+      })
+    );
+  };
 
   useEffect(() => {
     if (firstRenderRef.current) {
@@ -33,7 +35,9 @@ const App = () => {
   return (
     <>
       <div>
-        <Button onButtonClick={handleClick} color="primary">Add Topping</Button>
+        <Button onButtonClick={handleClick} color="primary">
+          Add Topping
+        </Button>
       </div>
     </>
   );
