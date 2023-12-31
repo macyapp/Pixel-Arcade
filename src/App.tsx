@@ -1,29 +1,45 @@
 // import Like from "./components/Like";
 // import Message from "./components/Message";
 import Button from "./components/Button";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const App = () => {
-  const [counter, updateCounter] = useState({
-    count: 0,
-    nested: {
-      innercount: 0,
-    },
-  });
+  const [emotion, setEmotion] = useState(["happy", "sad", "angry"]);
+  const firstRenderRef = useRef(true);
 
   const handleClick = () => {
-    updateCounter({
-      ...counter,
-      nested: { ...counter.nested, innercount: counter.nested.innercount + 1 },
+    // When the button is clicked add new item in the array
+    // We can't do tags.push() as it modifies the original array
+    // Instead we can
+    setEmotion((currentEmotion) => {
+      // Add "exciting" to the array
+      let updatedEmotion = [...currentEmotion, "exciting"];
+
+      // Remove "happy" from the array
+      updatedEmotion = updatedEmotion.filter((emotion) => emotion !== "happy");
+
+      // Update "happy" to "happiness" in the array
+      return updatedEmotion.map((emotion) =>
+        emotion === "happy" ? "happiness" : emotion
+      );
     });
-    console.clear();
-    console.log("Clicked", counter.nested.innercount + 1);
+    console.log(emotion);
   };
+
+  useEffect(() => {
+    if (firstRenderRef.current) {
+      // It's the first render, so skip this effect
+      firstRenderRef.current = false;
+      return;
+    }
+    // It's not the first render, so run the effect
+    console.log(emotion);
+  }, [emotion]); // Only re-run the effect if emotion changes
 
   return (
     <>
       <Button color="primary" onButtonClick={handleClick}>
-        Click Me {counter.nested.innercount}
+        Click Me
       </Button>
     </>
   );
