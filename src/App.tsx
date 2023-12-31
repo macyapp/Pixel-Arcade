@@ -7,13 +7,33 @@ import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
 
 const App = () => {
-  const [cartItems, setCartItems] = useState(["Product1", "Product2"]);
+  const [pizza, setPizza] = useState({
+    name: "Spicy Pepperoni",
+    toppings: ["Mushroom"],
+  });
+  const firstRenderRef = useRef(true);
+
+  const handleClick = () => {
+    setPizza({...pizza, toppings: [...pizza.toppings, "Cheese"]});
+    // setPizza(produce((draft) => {
+    //   draft.toppings.push("Cheese");
+    // }))
+  }
+
+  useEffect(() => {
+    if (firstRenderRef.current) {
+      // It's the first render, so skip this effect
+      firstRenderRef.current = false;
+      return;
+    }
+    // It's not the first render, so run the effect
+    console.log(pizza);
+  }, [pizza]); // Only re-run the effect if emotion changes
 
   return (
     <>
       <div>
-        <NavBar cartItemsCount={cartItems.length} />
-        <Cart cartItems={cartItems} onClear={() => setCartItems([])} />
+        <Button onButtonClick={handleClick} color="primary">Add Topping</Button>
       </div>
     </>
   );
