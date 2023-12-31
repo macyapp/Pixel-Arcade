@@ -4,37 +4,19 @@ import Button from "./components/Button";
 import { useEffect, useState, useRef } from "react";
 
 const App = () => {
-  const [emotion, setEmotion] = useState(["happy", "sad", "angry"]);
-  const firstRenderRef = useRef(true);
+  const [bugs, setBugs] = useState([
+    { id: 1, title: "Bug 1", fixed: false },
+    { id: 2, title: "Bug 2", fixed: false },
+  ]);
 
   const handleClick = () => {
-    // When the button is clicked add new item in the array
-    // We can't do tags.push() as it modifies the original array
-    // Instead we can
-    setEmotion((currentEmotion) => {
-      // Add "exciting" to the array
-      let updatedEmotion = [...currentEmotion, "exciting"];
-
-      // Remove "happy" from the array
-      updatedEmotion = updatedEmotion.filter((emotion) => emotion !== "happy");
-
-      // Update "happy" to "happiness" in the array
-      return updatedEmotion.map((emotion) =>
-        emotion === "happy" ? "happiness" : emotion
-      );
-    });
-    console.log(emotion);
+    setBugs(bugs.map((bug) => (bug.id === 1 ? { ...bug, fixed: true } : bug)));
   };
 
+  // Use useEffect to log changes to the bugs array
   useEffect(() => {
-    if (firstRenderRef.current) {
-      // It's the first render, so skip this effect
-      firstRenderRef.current = false;
-      return;
-    }
-    // It's not the first render, so run the effect
-    console.log(emotion);
-  }, [emotion]); // Only re-run the effect if emotion changes
+    console.log('Updated bugs:', bugs);
+  }, [bugs]); // This effect runs whenever the bugs array changes
 
   return (
     <>
