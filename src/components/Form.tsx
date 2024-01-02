@@ -1,30 +1,50 @@
-import React, { FormEvent, useRef } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 
 const Form = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const ageRef = useRef<HTMLInputElement>(null);
-  const person = { firstName: "", age: 0 };
+  const [person, setPerson] = useState({
+    firstName: "",
+    age: 0,
+  });
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (nameRef.current !== null) person.firstName = nameRef.current.value;
-    if (ageRef.current !== null) person.age = parseInt(ageRef.current.value);
-
+    // Handle the person data, e.g., send to a server or log to console
     console.log(person);
   };
+  
   return (
     <form onSubmit={onSubmit}>
       <div className="mb-3">
-        <label htmlFor="name" className="form-lable">
+        <label htmlFor="name" className="form-label">
           Name
         </label>
-        <input ref={nameRef} id="name" type="text" className="form-control" />
+        <input
+          onChange={(e) =>
+            setPerson((prevState) => ({
+              ...prevState,
+              firstName: e.target.value,
+            }))
+          }
+          id="name"
+          type="text"
+          className="form-control"
+        />
       </div>
       <div className="mb-3">
-        <label htmlFor="age" className="form-lable">
+        <label htmlFor="age" className="form-label">
           Age
         </label>
-        <input ref={ageRef} id="age" type="number" className="form-control" />
+        <input
+          onChange={(e) =>
+            setPerson((prevState) => ({
+              ...prevState,
+              age: e.target.value ? parseInt(e.target.value) : 0, // Default to 0 or another appropriate value if empty
+            }))
+          }
+          id="age"
+          type="number"
+          className="form-control"
+        />
       </div>
       <button className="btn btn-primary" type="submit">
         Submit
