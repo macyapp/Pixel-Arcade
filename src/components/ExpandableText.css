@@ -1,0 +1,11 @@
+/* Default styling for the span */
+.expandable-text {
+    color: grey;
+    text-decoration: underline;
+    cursor: pointer;
+}
+  
+/* Styling for the span when active */
+.expandable-text.active {
+    color: darkgrey !important; /* Ensure this takes precedence */
+}
