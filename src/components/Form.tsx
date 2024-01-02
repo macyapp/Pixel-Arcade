@@ -19,6 +19,7 @@ const Form = () => {
           Name
         </label>
         <input
+          value={person.firstName}
           onChange={(e) =>
             setPerson((prevState) => ({
               ...prevState,
@@ -35,6 +36,7 @@ const Form = () => {
           Age
         </label>
         <input
+          value={person.age}
           onChange={(e) =>
             setPerson((prevState) => ({
               ...prevState,
