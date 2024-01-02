@@ -3,7 +3,7 @@ import React, { FormEvent, useRef, useState } from "react";
 const Form = () => {
   const [person, setPerson] = useState({
     firstName: "",
-    age: 0,
+    age: "",
   });
 
   const onSubmit = (e: FormEvent) => {
@@ -11,7 +11,7 @@ const Form = () => {
     // Handle the person data, e.g., send to a server or log to console
     console.log(person);
   };
-  
+
   return (
     <form onSubmit={onSubmit}>
       <div className="mb-3">
@@ -40,7 +40,8 @@ const Form = () => {
           onChange={(e) =>
             setPerson((prevState) => ({
               ...prevState,
-              age: e.target.value ? parseInt(e.target.value) : 0, // Default to 0 or another appropriate value if empty
+              // Keep age as a string, and only use the numerical value when necessary
+              age: e.target.value,
             }))
           }
           id="age"
